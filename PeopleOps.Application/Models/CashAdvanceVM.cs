@@ -11,6 +11,7 @@ namespace PeopleOps.Application.Models
         [Range(5000, 50000.00)]
         public decimal Amount { get; set; }
         [Required]
+        [MinLength(10)]
         public string Comment { get; set; }
     }
 
