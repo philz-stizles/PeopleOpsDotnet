@@ -1,0 +1,32 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UserSecretsId>aspnet-PeopleOps.UI-DC6BF04B-05A5-4C67-899C-3BA3E6F38C76</UserSecretsId>
+    <CopyRefAssembliesToPublishDirectory>false</CopyRefAssembliesToPublishDirectory>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="10.1.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="3.1.17" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.19" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="3.1.19" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="3.1.17" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.17">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.5" />
+    <PackageReference Include="StackExchange.Redis" Version="2.2.50" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\PeopleOps.Application\PeopleOps.Application.csproj" />
+    <ProjectReference Include="..\PeopleOps.Infrastructure\PeopleOps.Infrastructure.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\lib\AdminLTE-3.1.0\plugins\" />
+  </ItemGroup>
+
+</Project>

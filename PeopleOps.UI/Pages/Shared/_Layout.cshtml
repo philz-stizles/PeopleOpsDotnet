@@ -1,0 +1,41 @@
+﻿@using PeopleOps.Domain.Entities
+@inject SignInManager<Employee> SignInManager
+@inject UserManager<Employee> UserManager
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - PeopleOps</title>
+
+    <!-- Google Font: Source Sans Pro -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="~/lib/AdminLTE-3.1.0/plugins/fontawesome-free/css/all.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="~/lib/AdminLTE-3.1.0/dist/css/adminlte.min.css">
+    <link rel="stylesheet" href="~/css//site.css">
+</head>
+<body>
+    <!-- Header-->
+    <partial name="_HeaderPartial" />
+    <!-- /.header-content -->
+    <!-- Page content -->
+    <main role="main">
+        @RenderBody()
+    </main>
+    <!-- /.page-content -->
+    <!-- Footer -->
+    <partial name="_FooterPartial" />
+    <!-- /.footer-content -->
+    <!-- REQUIRED SCRIPTS -->
+    <!-- jQuery -->
+    <script src="~/lib/AdminLTE-3.1.0/plugins/jquery/jquery.min.js"></script>
+    <!-- Bootstrap 4 -->
+    <script src="~/lib/AdminLTE-3.1.0/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="~/lib/AdminLTE-3.1.0/dist/js/adminlte.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

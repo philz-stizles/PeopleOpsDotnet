@@ -1,0 +1,30 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Persistence\Migrations\20211010234414_InitializeAppEntities.cs" />
+    <Compile Remove="Persistence\Migrations\20211010234414_InitializeAppEntities.Designer.cs" />
+    <Compile Remove="Persistence\Migrations\20211012070650_InitializeAppEntities.cs" />
+    <Compile Remove="Persistence\Migrations\20211012070650_InitializeAppEntities.Designer.cs" />
+    <Compile Remove="Persistence\Migrations\20211012071640_InitializeAppEntities.cs" />
+    <Compile Remove="Persistence\Migrations\20211012071640_InitializeAppEntities.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.17" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.17">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\PeopleOps.Application\PeopleOps.Application.csproj" />
+    <ProjectReference Include="..\PeopleOps.Domain\PeopleOps.Domain.csproj" />
+  </ItemGroup>
+
+</Project>
