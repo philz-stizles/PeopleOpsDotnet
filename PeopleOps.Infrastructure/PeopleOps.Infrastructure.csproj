@@ -24,7 +24,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\PeopleOps.Application\PeopleOps.Application.csproj" />
-    <ProjectReference Include="..\PeopleOps.Domain\PeopleOps.Domain.csproj" />
   </ItemGroup>
 
 </Project>

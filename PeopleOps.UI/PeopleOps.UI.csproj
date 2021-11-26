@@ -26,6 +26,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Pages\Admin\LeaveAllocation\" />
+    <Folder Include="Pages\Admin\CashAdvances\" />
     <Folder Include="wwwroot\lib\AdminLTE-3.1.0\plugins\" />
   </ItemGroup>
 

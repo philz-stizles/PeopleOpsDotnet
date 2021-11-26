@@ -1,0 +1,126 @@
+﻿@page
+@model PeopleOps.UI.Pages.CashAdvances.IndexModel
+@{
+    ViewData["Title"] = "Cash Advances";
+    Layout = "~/Pages/Shared/_DashboardLayout.cshtml";
+}
+@*<div class="d-flex justify-content-end my-4">
+        <button type="button" class="btn btn-default" data-toggle="modal" data-target="#modal-default">
+            Apply for Cash Advance
+        </button>
+    </div>*@
+<div class="card">
+    <div class="card-header">
+        <div class="d-flex justify-content-between">
+            <div class="d-flex align-items-center">
+                <span>Show</span>&nbsp;
+                <select type="search" class="form-control form-control-sm">
+                    <option value="10">10</option>
+                    <option value="20">20</option>
+                    <option value="30">30</option>
+                    <option value="40">40</option>
+                    <option value="50">50</option>
+                </select>&nbsp;
+                <span>entries</span>
+            </div>
+            <!--<div class="d-flex align-items-center w-40">-->
+            @*<span class="d-block">Search:</span>&nbsp;*@
+            <!--<input type="search" class="form-control form-control-sm" placeholder="Search" />
+            </div>-->
+            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal-default">
+                Apply for Cash Advance
+            </button>
+        </div>
+    </div>
+    <div class="card-body">
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Description</th>
+                    <th>Amount</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.CashAdvances)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(modelItem => item.Comment)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Amount)</td>
+                        <td>@Html.DisplayFor(modelItem => item.ApprovalStatus)</td>
+                        <td class="d-flex justify-content-end">
+                            <a class="btn btn-warning btn-sm ml-2" asp-action="Edit" asp-route-id="@item.Id" aria-hidden="true">
+                                Edit &nbsp;<i class="fa fa-pencil"></i>
+                            </a>
+                            <a class="btn btn-info btn-sm ml-2" asp-action="Details" asp-route-id="@item.Id" aria-hidden="true">
+                                Details &nbsp;<i class="far fa-eye"></i>
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        
+    </div>
+    <div class="card-footer">
+        <div class="d-flex justify-content-between">
+            <div>Showing 1 to 3 of @Model.CashAdvances.Count() entries</div>
+            <div>
+                <span>Previous</span>&nbsp;&nbsp;
+                @for (int i = 1; i < 5; i++)
+                {
+                if (i >= 4)
+                {
+                <a style="color: #d8ddef" class="btn btn-sm btn-outline">....</a>
+                break;
+                }
+                <a class="btn btn-sm btn-outline-secondary">@i</a>
+                }
+                &nbsp;&nbsp;<span>Next</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*<div class="modal fade @((!@Model.ModelState.IsValid)  ? "show" : "")" id="modal-default" style="display: @((!@Model.ModelState.IsValid)  ? "block" : "hidden")">*@
+<div class="modal fade" id="modal-default">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Cash Advance</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="cashAdvances" method="post">
+                    <hr />
+                    @*<div asp-validation-summary="All" class="text-danger"></div>*@
+                    <div class="form-group">
+                        <label asp-for="Input.Amount">Amount</label>
+                        <input asp-for="Input.Amount" type="text" class="form-control" placeholder="Amount ...">
+                        <span asp-validation-for="Input.Amount" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="Input.Comment">Comment</label>
+                        <textarea asp-for="Input.Comment" class="form-control" rows="3" placeholder="Comment ..."></textarea>
+                        <span asp-validation-for="Input.Comment" class="text-danger"></span>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer justify-content-between">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button form="cashAdvances" type="submit" class="btn btn-success">Create</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+@section Scripts{
+    <script type="text/javascript" src="~/js/cashadvance.js"></script>
+}

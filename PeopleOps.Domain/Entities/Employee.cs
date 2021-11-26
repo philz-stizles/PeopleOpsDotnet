@@ -10,7 +10,7 @@ namespace PeopleOps.Domain.Entities
     {
         // NotMapped - This property will not be mapped to a database table
         [NotMapped]
-        public string FullName { get; set; }
+        public string FullName { get { return FirstName + " " + LastName; } }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Bio { get; set; }

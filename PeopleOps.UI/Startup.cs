@@ -26,6 +26,7 @@ namespace PeopleOps.UI
         {
             services.AddApplicationServices(Configuration);
             services.AddInfrastructureServices(Configuration);
+            services.AddHttpContextAccessor();
 
             services.AddDefaultIdentity<Employee>(options => options.SignIn.RequireConfirmedAccount = false)
                 .AddRoles<IdentityRole>()
