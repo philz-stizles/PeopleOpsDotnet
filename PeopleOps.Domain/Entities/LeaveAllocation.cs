@@ -7,8 +7,8 @@ namespace PeopleOps.Domain.Entities
     [Table("LeaveAllocations")]
     public class LeaveAllocation: EntityBase
     {
+        [Required]
         public int NumberOfDays { get; set; }
-        public DateTime DateCreated { get; set; }
 
         [ForeignKey("EmployeeId")]
         public Employee Employee { get; set; }
@@ -17,6 +17,7 @@ namespace PeopleOps.Domain.Entities
         [ForeignKey("LeaveTypeId")]
         public LeaveType LeaveType { get; set; }
         public int LeaveTypeId { get; set; }
+
         public int Period { get; set; }
     }
 }

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace PeopleOps.Infrastructure.Persistence.Migrations
 {
-    public partial class InitialEntities : Migration
+    public partial class InitialMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -60,7 +60,7 @@ namespace PeopleOps.Infrastructure.Persistence.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     CreatedBy = table.Column<string>(nullable: true),
-                    CreatedDa = table.Column<DateTime>(nullable: false),
+                    CreatedDate = table.Column<DateTime>(nullable: false),
                     LastModifiedBy = table.Column<string>(nullable: true),
                     LastModifiedDate = table.Column<DateTime>(nullable: true),
                     Street = table.Column<string>(nullable: true),
@@ -113,7 +113,7 @@ namespace PeopleOps.Infrastructure.Persistence.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     CreatedBy = table.Column<string>(nullable: true),
-                    CreatedDa = table.Column<DateTime>(nullable: false),
+                    CreatedDate = table.Column<DateTime>(nullable: false),
                     LastModifiedBy = table.Column<string>(nullable: true),
                     LastModifiedDate = table.Column<DateTime>(nullable: true),
                     EmployeeId = table.Column<string>(nullable: false),
@@ -139,7 +139,7 @@ namespace PeopleOps.Infrastructure.Persistence.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     CreatedBy = table.Column<string>(nullable: true),
-                    CreatedDa = table.Column<DateTime>(nullable: false),
+                    CreatedDate = table.Column<DateTime>(nullable: false),
                     LastModifiedBy = table.Column<string>(nullable: true),
                     LastModifiedDate = table.Column<DateTime>(nullable: true),
                     IsMain = table.Column<bool>(nullable: false),
@@ -164,7 +164,7 @@ namespace PeopleOps.Infrastructure.Persistence.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     CreatedBy = table.Column<string>(nullable: true),
-                    CreatedDa = table.Column<DateTime>(nullable: false),
+                    CreatedDate = table.Column<DateTime>(nullable: false),
                     LastModifiedBy = table.Column<string>(nullable: true),
                     LastModifiedDate = table.Column<DateTime>(nullable: true),
                     Name = table.Column<int>(nullable: false),
@@ -182,10 +182,12 @@ namespace PeopleOps.Infrastructure.Persistence.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     CreatedBy = table.Column<string>(nullable: true),
-                    CreatedDa = table.Column<DateTime>(nullable: false),
+                    CreatedDate = table.Column<DateTime>(nullable: false),
                     LastModifiedBy = table.Column<string>(nullable: true),
                     LastModifiedDate = table.Column<DateTime>(nullable: true),
-                    Name = table.Column<string>(nullable: true)
+                    Name = table.Column<string>(maxLength: 50, nullable: false),
+                    DefaultDays = table.Column<int>(nullable: false),
+                    Description = table.Column<string>(maxLength: 100, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -199,7 +201,7 @@ namespace PeopleOps.Infrastructure.Persistence.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     CreatedBy = table.Column<string>(nullable: true),
-                    CreatedDa = table.Column<DateTime>(nullable: false),
+                    CreatedDate = table.Column<DateTime>(nullable: false),
                     LastModifiedBy = table.Column<string>(nullable: true),
                     LastModifiedDate = table.Column<DateTime>(nullable: true),
                     Name = table.Column<int>(nullable: false),
@@ -225,11 +227,10 @@ namespace PeopleOps.Infrastructure.Persistence.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     CreatedBy = table.Column<string>(nullable: true),
-                    CreatedDa = table.Column<DateTime>(nullable: false),
+                    CreatedDate = table.Column<DateTime>(nullable: false),
                     LastModifiedBy = table.Column<string>(nullable: true),
                     LastModifiedDate = table.Column<DateTime>(nullable: true),
                     NumberOfDays = table.Column<int>(nullable: false),
-                    DateCreated = table.Column<DateTime>(nullable: false),
                     EmployeeId = table.Column<string>(nullable: true),
                     LeaveTypeId = table.Column<int>(nullable: false),
                     Period = table.Column<int>(nullable: false)
@@ -258,14 +259,14 @@ namespace PeopleOps.Infrastructure.Persistence.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     CreatedBy = table.Column<string>(nullable: true),
-                    CreatedDa = table.Column<DateTime>(nullable: false),
+                    CreatedDate = table.Column<DateTime>(nullable: false),
                     LastModifiedBy = table.Column<string>(nullable: true),
                     LastModifiedDate = table.Column<DateTime>(nullable: true),
                     StartDate = table.Column<DateTime>(nullable: false),
                     EndDate = table.Column<DateTime>(nullable: false),
                     DateRequested = table.Column<DateTime>(nullable: false),
                     DateActioned = table.Column<DateTime>(nullable: false),
-                    Approved = table.Column<bool>(nullable: true),
+                    Approved = table.Column<bool>(nullable: false),
                     RequestingEmployeeId = table.Column<string>(nullable: true),
                     LeaveTypeId = table.Column<int>(nullable: false),
                     ApprovedById = table.Column<string>(nullable: true)
@@ -287,6 +288,48 @@ namespace PeopleOps.Infrastructure.Persistence.Migrations
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_LeaveHistories_AspNetUsers_RequestingEmployeeId",
+                        column: x => x.RequestingEmployeeId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "LeaveRequests",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CreatedBy = table.Column<string>(nullable: true),
+                    CreatedDate = table.Column<DateTime>(nullable: false),
+                    LastModifiedBy = table.Column<string>(nullable: true),
+                    LastModifiedDate = table.Column<DateTime>(nullable: true),
+                    StartDate = table.Column<DateTime>(nullable: false),
+                    EndDate = table.Column<DateTime>(nullable: false),
+                    DateRequested = table.Column<DateTime>(nullable: false),
+                    DateActioned = table.Column<DateTime>(nullable: false),
+                    Approved = table.Column<bool>(nullable: false),
+                    RequestingEmployeeId = table.Column<string>(nullable: true),
+                    LeaveTypeId = table.Column<int>(nullable: false),
+                    ApprovedById = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_LeaveRequests", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_LeaveRequests_AspNetUsers_ApprovedById",
+                        column: x => x.ApprovedById,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_LeaveRequests_LeaveTypes_LeaveTypeId",
+                        column: x => x.LeaveTypeId,
+                        principalTable: "LeaveTypes",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_LeaveRequests_AspNetUsers_RequestingEmployeeId",
                         column: x => x.RequestingEmployeeId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
@@ -339,6 +382,21 @@ namespace PeopleOps.Infrastructure.Persistence.Migrations
                 column: "RequestingEmployeeId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_LeaveRequests_ApprovedById",
+                table: "LeaveRequests",
+                column: "ApprovedById");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_LeaveRequests_LeaveTypeId",
+                table: "LeaveRequests",
+                column: "LeaveTypeId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_LeaveRequests_RequestingEmployeeId",
+                table: "LeaveRequests",
+                column: "RequestingEmployeeId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Skill_EmployeeId",
                 table: "Skill",
                 column: "EmployeeId");
@@ -378,6 +436,9 @@ namespace PeopleOps.Infrastructure.Persistence.Migrations
 
             migrationBuilder.DropTable(
                 name: "LeaveHistories");
+
+            migrationBuilder.DropTable(
+                name: "LeaveRequests");
 
             migrationBuilder.DropTable(
                 name: "Skill");

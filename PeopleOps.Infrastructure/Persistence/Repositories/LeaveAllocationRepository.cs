@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace PeopleOps.Infrastructure.Persistence.Repositories
 {
-    public class LeaveAllocationRepository : RepositoryBase<LeaveAllocation>, ILeaveAllocationRepository
+    public class LeaveAllocationRepository : GenericRepository<LeaveAllocation>, ILeaveAllocationRepository
     {
         public LeaveAllocationRepository(ApplicationDbContext dbContext) : base(dbContext)
         {

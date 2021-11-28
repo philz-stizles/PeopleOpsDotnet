@@ -3,6 +3,7 @@ using PeopleOps.Application.Contracts.Repositories;
 using PeopleOps.Application.Contracts.Services;
 using PeopleOps.Application.Models;
 using PeopleOps.Domain.Entities;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -11,28 +12,29 @@ namespace PeopleOps.Infrastructure.Persistence.Repositories
     public class CashAdvanceService : ICashAdvanceService
     {
         private readonly IUserAccessor _userAccessor;
-        private readonly ICashAdvanceRepository _cashAdvanceRepository;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
-        public CashAdvanceService(IUserAccessor userAccessor, 
-            ICashAdvanceRepository cashAdvanceRepository, IMapper mapper)
+        public CashAdvanceService(IUserAccessor userAccessor, IUnitOfWork unitOfWork, IMapper mapper)
         {
             _userAccessor = userAccessor;
-            _cashAdvanceRepository = cashAdvanceRepository;
+            _unitOfWork = unitOfWork;
             _mapper = mapper;
         }
 
-        public async Task<IReadOnlyList<CashAdvanceVM>> GetAllAsync()
+        public async Task<IReadOnlyList<CashAdvanceVM>> FindAllAsync()
         {
-            var cashAdvances = await _cashAdvanceRepository.GetAllAsync();
+            var cashAdvances = await _unitOfWork.CashAdvances.FindAllAsync();
             return _mapper.Map<IReadOnlyList<CashAdvanceVM>>(cashAdvances);
         }
 
-        public async Task<CashAdvanceVM> AddAsync(CashAdvanceCreateVM vm)
+        public async Task CreateAsync(CashAdvanceModel model)
         {
-            var newCashAdvance = _mapper.Map<CashAdvance>(vm);
+            var newCashAdvance = _mapper.Map<CashAdvance>(model);
             newCashAdvance.EmployeeId = _userAccessor.GetCurrentUserId();
-            var cashAdvance = await _cashAdvanceRepository.AddAsync(newCashAdvance);
-            return _mapper.Map<CashAdvanceVM>(cashAdvance);
+            newCashAdvance.CreatedBy = _userAccessor.GetCurrentUserId();
+            newCashAdvance.CreatedDate = DateTime.Now;
+            await _unitOfWork.CashAdvances.CreateAsync(newCashAdvance);
+            await _unitOfWork.SaveAsync();
         }
     }
 }

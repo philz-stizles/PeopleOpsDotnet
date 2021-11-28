@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace PeopleOps.Application.Models
 {
-    public class CashAdvanceCreateVM
+    public class CashAdvanceModel
     {
         public int Id { get; set; }
         [Required]

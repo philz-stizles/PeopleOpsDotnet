@@ -2,10 +2,10 @@
 @model IndexModel
 @{
     ViewData["Title"] = "Home page";
-    Layout = "~/Pages/Shared/_Layout.cshtml";
+    Layout = "~/Pages/Shared/Layouts/_Layout.cshtml";
 }
 
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
-    <a asp-page="/dashboard" class="btn btn-success">Back to Dashboard</a>
+    <a asp-page="/Dashboard/Index" class="btn btn-success">Back to Dashboard</a>
 </div>

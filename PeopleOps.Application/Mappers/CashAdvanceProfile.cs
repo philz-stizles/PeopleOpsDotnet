@@ -9,7 +9,7 @@ namespace PeopleOps.Application.Mappers
         public CashAdvanceProfile()
         {
             CreateMap<CashAdvance, CashAdvanceVM>().ReverseMap();
-            CreateMap<CashAdvanceCreateVM, CashAdvance>();
+            CreateMap<CashAdvanceModel, CashAdvance>();
         }
     }
 }

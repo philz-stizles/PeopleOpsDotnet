@@ -1,0 +1,43 @@
+﻿@page
+@model PeopleOps.UI.Pages.Dashboard.Leave.UpsertModel
+@{
+    ViewData["Title"] = "Home page";
+    ViewData["ActivePage"] = "Leave Types";
+
+    bool isEditMode = Model != null && Model.Input != null && Model.Input.Id != 0;
+    var buttonText = isEditMode ? "Edit" : "Create";
+}
+
+<div class="card">
+    <div class="card-body">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            @if (isEditMode)
+            {
+                <input type="hidden" asp-for="Input.Id">
+            }
+            <div class="form-group">
+                <label asp-for="Input.Name" class="control-label"></label>
+                <input asp-for="Input.Name" class="form-control" />
+                <span asp-validation-for="Input.Name" class="text-danger text-sm"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Input.Description" class="control-label"></label>
+                <input asp-for="Input.Description" class="form-control" />
+                <span asp-validation-for="Input.Description" class="text-danger text-sm"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Input.DefaultDays" class="control-label"></label>
+                <input type="number" min="1" max="25" asp-for="Input.DefaultDays" class="form-control" />
+                <span asp-validation-for="Input.DefaultDays" class="text-danger text-sm"></span>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="@buttonText" class="btn btn-success btn-block" />
+            </div>
+        </form>
+        <a class="btn btn-secondary btn-block" asp-page="Index">Back to List</a>
+    </div>
+</div>

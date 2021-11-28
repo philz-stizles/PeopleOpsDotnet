@@ -6,7 +6,7 @@ namespace PeopleOps.Application.Contracts.Services
 {
     public interface ICashAdvanceService
     {
-        Task<IReadOnlyList<CashAdvanceVM>> GetAllAsync();
-        Task<CashAdvanceVM> AddAsync(CashAdvanceCreateVM vm);
+        Task<IReadOnlyList<CashAdvanceVM>> FindAllAsync();
+        Task CreateAsync(CashAdvanceModel model);
     }
 }

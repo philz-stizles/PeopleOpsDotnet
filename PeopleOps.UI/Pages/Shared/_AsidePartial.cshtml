@@ -42,7 +42,7 @@
                 <!-- Add icons to the links using the .nav-icon class
                 with font-awesome or any other icon font library -->
                 <li class="nav-item">
-                    <a class="nav-link @(currentRoute == "/dashboard" ? "active" : "" )" asp-area="" asp-page="/Dashboard">
+                    <a class="nav-link @(currentRoute == "/dashboard" ? "active" : "")" asp-page="/Dashboard/Index">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>
                             Dashboard
@@ -51,7 +51,7 @@
                 </li>
                 @if (User.IsInRole(RoleTypes.Admin.ToString()))
                 {
-                    <li class="nav-item menu-close">
+                    <li class="nav-item menu-close @(currentRoute.Contains("leave") ? "menu-open" : "")">
                         <a href="#" class="nav-link">
                             <i class="nav-icon fas fa-tachometer-alt"></i>
                             <p>
@@ -61,19 +61,19 @@
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a class="nav-link active" asp-area="" asp-page="/Admin/LeaveTypes">
+                                <a class="nav-link @(currentRoute.Contains("/admin/leavetypes") ? "active" : "")" asp-page="/Admin/LeaveTypes/Index">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Leave Types</p>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" asp-area="" asp-page="/Admin/LeaveAllocations">
+                                <a class="nav-link @(currentRoute == "/admin/leaveallocations" ? "active" : "")" asp-page="/Admin/LeaveAllocations/Index">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Leave Allocations</p>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" asp-page="/Admin/LeaveRequests">
+                                <a class="nav-link @(currentRoute.Contains("/admin/leaverequests") ? "active" : "")" asp-page="/Admin/LeaveRequests/Index">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Leave Requests</p>
                                 </a>
@@ -83,7 +83,7 @@
                 }
 
                 <li class="nav-item">
-                    <a class="nav-link @(currentRoute == "/cashadvances" ? "active" : "" )" asp-area="" asp-page="/CashAdvances/Index">
+                    <a class="nav-link @(currentRoute == "/cashadvances" ? "active" : "")" asp-area="" asp-page="/Dashboard/CashAdvances/Index">
                         <i class="nav-icon fas fa-th"></i>
                         <p>
                             Cash Advances
@@ -92,7 +92,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" asp-area="" asp-page="/Privacy">
+                    <a class="nav-link" asp-page="/Dashboard/Leave/Index">
                         <i class="nav-icon fas fa-th"></i>
                         <p>
                             My Leave
@@ -127,31 +127,31 @@
                     </li>
 }
                 <li class="nav-item">
-                    <a class="nav-link @(currentRoute == "/kanban" ? "active" : "" )" asp-page="/Kanban/Index">
+                    <a class="nav-link @(currentRoute == "/kanban" ? "active" : "")" asp-page="/Kanban/Index">
                         <i class="nav-icon fas fa-list-alt"></i>
                         <p>Kanban Board</p>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link @(currentRoute == "/meetings" ? "active" : "" )" asp-page="/Meetings/Index">
+                    <a class="nav-link @(currentRoute == "/meetings" ? "active" : "")" asp-page="/Meetings/Index">
                         <i class="nav-icon far fa-calendar"></i>
                         <p>Meetings</p>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link @(currentRoute == "/okrs" ? "active" : "" )" asp-page="/OKRs/Index">
+                    <a class="nav-link @(currentRoute == "/okrs" ? "active" : "")" asp-page="/OKRs/Index">
                         <i class="nav-icon fas fa-business-time"></i>
                         <p>OKRs</p>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link @(currentRoute == "/profile" ? "active" : "" )" asp-page="/Profile/Index">
+                    <a class="nav-link @(currentRoute == "/profile" ? "active" : "")" asp-page="/Profile/Index">
                         <i class="nav-icon fas fa-user-cog"></i>
                         <p>Profile</p>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link @(currentRoute == "/settings" ? "active" : "" )" asp-page="/Settings/Index">
+                    <a class="nav-link @(currentRoute == "/settings" ? "active" : "")" asp-page="/Settings/Index">
                         <i class="nav-icon fa fa-solid fa-gear"></i>
                         <p>Settings</p>
                     </a>

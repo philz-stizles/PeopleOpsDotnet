@@ -9,6 +9,11 @@ namespace PeopleOps.Application.Mappers
         public LeaveProfile()
         {
             CreateMap<LeaveType, LeaveTypeVM>().ReverseMap();
+            CreateMap<LeaveType, LeaveTypeModel>().ReverseMap();
+            CreateMap<LeaveTypeModel, LeaveType>();
+            CreateMap<LeaveRequest, LeaveRequestVM>().ReverseMap();
+            CreateMap<LeaveRequest, LeaveRequestModel>().ReverseMap();
+            CreateMap<LeaveRequestModel, LeaveRequest>();
         }
     }
 }

@@ -11,6 +11,8 @@
     <Compile Remove="Persistence\Migrations\20211012070650_InitializeAppEntities.Designer.cs" />
     <Compile Remove="Persistence\Migrations\20211012071640_InitializeAppEntities.cs" />
     <Compile Remove="Persistence\Migrations\20211012071640_InitializeAppEntities.Designer.cs" />
+    <Compile Remove="Persistence\Migrations\20211012202053_InitialEntities.cs" />
+    <Compile Remove="Persistence\Migrations\20211012202053_InitialEntities.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

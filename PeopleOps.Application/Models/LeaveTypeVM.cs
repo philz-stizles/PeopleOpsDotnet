@@ -3,16 +3,18 @@ using System.ComponentModel.DataAnnotations;
 
 namespace PeopleOps.Application.Models
 {
-    public class LeaveTypeCreateVM
+    public class LeaveTypeModel
     {
         public int Id { get; set; }
-        [Required]
+        [Required(ErrorMessage = "A name is required")]
+        [MaxLength(50, ErrorMessage = "The name should not be more than 50 characters")]
         public string Name { get; set; }
-        [Required]
+        [Required(ErrorMessage = "A description is required")]
         public string Description { get; set; }
+        [Required(ErrorMessage = "The number of days is required")]
         [Display(Name = "Default Number of Days")]
         [Range(1, 25, ErrorMessage = "Number of Days should be between 1 and 25")]
-        public string DefaultDays { get; set; }
+        public int DefaultDays { get; set; }
     }
 
     public class LeaveTypeVM
@@ -21,7 +23,7 @@ namespace PeopleOps.Application.Models
         public string Name { get; set; }
         public string Description { get; set; }
         [Display(Name = "Default Number of Days")]
-        public string DefaultDays { get; set; }
+        public int DefaultDays { get; set; }
         [Display(Name = "Date Created")]
         public DateTime DateCreated { get; set; }
     }

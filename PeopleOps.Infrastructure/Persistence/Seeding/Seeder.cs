@@ -21,8 +21,9 @@ namespace PeopleOps.Infrastructure.Persistence.Seeding
                 Email = "admin@peopleops.com",
                 EmailConfirmed = true
             };
-            
-            if ((await userManager.FindByNameAsync(seedUser.UserName)) == null)
+
+            var existingAdmin = await userManager.FindByNameAsync(seedUser.UserName);
+            if (existingAdmin == null)
             {
                 var result = await userManager.CreateAsync(seedUser, "P@ssw0rd");
                 if (result.Succeeded)

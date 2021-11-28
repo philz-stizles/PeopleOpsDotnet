@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Identity;
 
 namespace PeopleOps.Domain.Entities
 {
-    [Table("Employees")]
     public class Employee : IdentityUser
     {
         // NotMapped - This property will not be mapped to a database table

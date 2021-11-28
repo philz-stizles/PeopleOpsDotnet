@@ -19,9 +19,9 @@ namespace PeopleOps.UI.ServiceConfigurations
             services.AddScoped<ICashAdvanceService, CashAdvanceService>();
             services.AddScoped<IUserAccessor, UserAccessor>();
             services.AddScoped<ILeaveTypeService, LeaveTypeService>();
+            services.AddScoped<ILeaveRequestService, LeaveRequestService>();
             services.AddScoped<IEmployeeService, EmployeeService>();
             services.AddScoped<INotificationService, NotificationService>();
-           /* services.AddScoped<IAuditRepository, AuditRepository>();*/
 
             return services;
         }

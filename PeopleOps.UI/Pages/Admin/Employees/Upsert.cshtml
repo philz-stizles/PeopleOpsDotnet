@@ -2,6 +2,7 @@
 @model PeopleOps.UI.Pages.Admin.Employees.UpsertModel
 @{
     Layout = "~/Pages/Shared/_DashboardLayout.cshtml";
+    ViewData["ActivePage"] = "Employees";
 }
 
 <form id="employee-form" method="post">
@@ -10,42 +11,54 @@
         <div class="col-md-6">
             <!-- general form elements -->
             <div class="card">
-                @*<div class="card-header">
-                        <h3 class="card-title">Profile</h3>
-                    </div>*@
-                <!-- /.card-header -->
+                <div class="card-header">
+                    <h3 class="card-title">Personal Information</h3>
+                 </div>
                 <!-- form start -->
 
                 <div class="card-body">
                     <div class="form-group row">
                         <div class="col">
-                            <label for="firstname">First name</label>
                             <input asp-for="Input.Firstname" type="text" class="form-control" id="firstname" placeholder="Enter first name">
-                            <span asp-validation-for="Input.Firstname" class="text-danger"></span>
+                            <small><span asp-validation-for="Input.Firstname" class="text-danger"></span></small>
                         </div>
                         <div class="col">
-                            <label for="lastname">Last name</label>
                             <input asp-for="Input.Lastname" type="text" class="form-control" id="lastname" placeholder="Enter last name">
-                            <span asp-validation-for="Input.Lastname" class="text-danger"></span>
+                            <small><span asp-validation-for="Input.Lastname" class="text-danger"></span></small>
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label for="email">Email</label>
-                        <input asp-for="Input.Email" type="email" class="form-control" id="email" placeholder="Enter email">
-                        <span asp-validation-for="Input.Email" class="text-danger"></span>
+                        <input asp-for="Input.Email" autocomplete="off" type="email" class="form-control" id="email" placeholder="Enter email">
+                        <small><span asp-validation-for="Input.Email" class="text-danger"></span></small>
                     </div>
                     <div class="form-group">
-                        <label for="phoneNumber">Phone number</label>
-                        <input asp-for="Input.PhoneNumber" type="tel" class="form-control" id="phoneNumber" placeholder="Password">
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleInputPassword1">Address</label>
-                        <textarea rows="3" class="form-control" id="exampleInputPassword1" placeholder="Enter .."></textarea>
+                        <input asp-for="Input.PhoneNumber" type="tel" class="form-control" id="phoneNumber" placeholder="Phone number">
+                        <small><span asp-validation-for="Input.PhoneNumber" class="text-danger"></span></small>
                     </div>
 
                 </div>
                 <!-- /.card-body -->
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Address Information</h3>
+                </div>
+                <!-- form start -->
+
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-8"><input asp-for="Input.Address.Street" class="form-control" type="text" placeholder="Street"></div>
+                        <div class="col-4"><input asp-for="Input.Address.City" class="form-control" type="text" placeholder="City"></div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-2"><input asp-for="Input.Address.Zip" class="form-control" type="text" placeholder="Zip"></div>
+                        <div class="col-6"><input asp-for="Input.Address.State" class="form-control" type="text" placeholder="State"></div>
+                        <div class="col-4"><input asp-for="Input.Address.Country" class="form-control" type="text" placeholder="Country"></div>
+                    </div>
+                    <br>
+                </div>
             </div>
             <!-- /.card -->
         </div>
@@ -54,25 +67,26 @@
         <div class="col-md-6">
             <!-- Form Element sizes -->
             <div class="card">
-                @*<div class="card-header">
-                        <h3 class="card-title">Assignment</h3>
-                    </div>*@
+                <div class="card-header">
+                        <h3 class="card-title">Professional Information</h3>
+                    </div>
                 <div class="card-body">
                     <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Employment Type">
+                    </div>
+                    <div class="form-group">
                         <label for="dateJoined">Date Joined</label>
-                        <input asp-for="Input.DateJoined" type="date" class="form-control" id="dateJoined" placeholder="Password">
+                        <input asp-for="Input.DateJoined" type="date" class="form-control" placeholder="Date Joined">
                     </div>
                     <div class="form-group">
-                        <label for="exampleInputEmail1">Department</label>
-                        <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
+                        <input type="email" class="form-control" placeholder="Department/Business Unit">
                     </div>
                     <div class="form-group">
-                        <label for="exampleInputPassword1">Role</label>
-                        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                        <input type="text" class="form-control" placeholder="Role">
                     </div>
                     <div class="form-group">
                         <label for="exampleInputPassword1">Line Manager</label>
-                        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                        <input type="password" class="form-control" placeholder="Line Mnager">
                     </div>
                     <div class="form-check">
                         <input type="checkbox" class="form-check-input" id="exampleCheck1">

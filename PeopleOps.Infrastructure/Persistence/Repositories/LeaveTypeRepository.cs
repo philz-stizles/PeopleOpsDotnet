@@ -1,11 +1,11 @@
-﻿using PeopleOps.Application.Contracts.Repositories;
+﻿/*using PeopleOps.Application.Contracts.Repositories;
 using PeopleOps.Domain.Entities;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace PeopleOps.Infrastructure.Persistence.Repositories
 {
-    public class LeaveTypeRepository : RepositoryBase<LeaveType>, ILeaveTypeRepository
+    public class LeaveTypeRepository : GenericRepository<LeaveType>, ILeaveTypeRepository
     {
         public LeaveTypeRepository(ApplicationDbContext dbContext) : base(dbContext)
         {
@@ -17,3 +17,4 @@ namespace PeopleOps.Infrastructure.Persistence.Repositories
         }
     }
 }
+*/

@@ -2,7 +2,7 @@
 
 namespace PeopleOps.Application.Contracts.Repositories
 {
-    public interface ILeaveHistoryRepository: IAsyncRepository<LeaveHistory>
+    public interface ILeaveHistoryRepository: IGenericRepository<LeaveHistory>
     {
     }
 }

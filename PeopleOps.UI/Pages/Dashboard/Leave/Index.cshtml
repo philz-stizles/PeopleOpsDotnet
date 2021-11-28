@@ -1,0 +1,85 @@
+﻿@page
+@model PeopleOps.UI.Pages.Dashboard.Leave.IndexModel
+@{
+    ViewData["ActivePage"] = "Leave Requests";
+}
+
+<div class="card">
+<div class="card-header">
+    <div class="d-flex justify-content-between">
+        <div class="d-flex align-items-center">
+            <span>Show</span>&nbsp;
+            <select type="search" class="form-control form-control-sm">
+                <option value="10">10</option>
+                <option value="20">20</option>
+                <option value="30">30</option>
+                <option value="40">40</option>
+                <option value="50">50</option>
+            </select>&nbsp;
+            <span>entries</span>
+        </div>
+        @*<div class="d-flex align-items-center w-40">
+            <span class="d-block">Search:</span>&nbsp;
+            <input type="search" class="form-control form-control-sm" placeholder="Search" />
+        </div>*@
+        <a class="btn btn-success" asp-page="Upsert">
+            Create New <i class="fa fa-plus"></i>
+        </a>
+
+    </div>
+</div>
+<div class="card-body">
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Employee</th>
+                <th>Leave Type</th>
+                <th>Status</th>
+                <th>Date</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.LeaveRequests)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.RequestingEmployee.FullName)</td>
+                    <td>@Html.DisplayFor(modelItem => item.LeaveType.Name)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Approved)</td>
+                    <td>@Html.DisplayFor(modelItem => item.DateRequested)</td>
+                    <td class="d-flex justify-content-start">
+                        <a class="btn btn-warning btn-sm" asp-page="/Admin/LeaveTypes/Upsert" asp-route-id="@item.Id" aria-hidden="true">
+                            Edit &nbsp;<i class="fa fa-pencil"></i>
+                        </a>
+                        <a class="btn btn-info btn-sm ml-2" asp-action="Details" asp-route-id="@item.Id" aria-hidden="true">
+                            Details &nbsp;<i class="far fa-eye"></i>
+                        </a>
+                        <a class="btn btn-danger btn-sm ml-2" onclick="return confirm('Are you sure you want to delete this item?');" asp-page="./Index" asp-page-handler="Delete" asp-route-id="@item.Id" aria-hidden="true">
+                            Delete &nbsp;<i class="fas fa-trash-alt"></i>
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+<div class="card-footer">
+    <div class="d-flex justify-content-between">
+        <div>Showing 1 to 3 of @Model.LeaveRequests.Count() entries</div>
+        <div>
+            <span>Previous</span>&nbsp;&nbsp;
+            @for (int i = 1; i < 5; i++)
+            {
+                if (i >= 4)
+                {
+                    <a style="color: #d8ddef" class="btn btn-sm btn-outline">....</a>
+                    break;
+                }
+                <a class="btn btn-sm btn-outline-secondary">@i</a>
+            }
+            &nbsp;&nbsp;<span>Next</span>
+        </div>
+    </div>
+</div>
+</div>

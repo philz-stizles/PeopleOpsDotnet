@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace PeopleOps.UI.Pages.Leave
+namespace PeopleOps.UI.Pages.Admin.LeaveAllocations
 {
     public class IndexModel : PageModel
     {

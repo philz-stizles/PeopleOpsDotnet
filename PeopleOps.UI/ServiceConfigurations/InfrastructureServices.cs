@@ -26,13 +26,12 @@ namespace PeopleOps.UI.ServiceConfigurations
                 return ConnectionMultiplexer.Connect(config);
             });
 
-            services.AddScoped(typeof(IAsyncRepository<>), typeof(RepositoryBase<>));
-            services.AddScoped<ICashAdvanceRepository, CashAdvanceRepository>();
+            services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             services.AddScoped<ILeaveAllocationRepository, LeaveAllocationRepository>();
-            services.AddScoped<ILeaveTypeRepository, LeaveTypeRepository>();
             services.AddScoped<ILeaveHistoryRepository, LeaveHistoryRepository>();
             services.AddScoped<INotificationRepository, NotificationRepository>();
             services.AddScoped<IAuditRepository, AuditRepository>();
+            services.AddTransient<IUnitOfWork, UnitOfWork>();
 
             // services.Configure<EmailSettings>(c => configuration.GetSection("EmailSettings"));
             // services.AddTransient<IEmailService, EmailService>();

@@ -22,12 +22,27 @@ namespace PeopleOps.Application.Models
 
     public class EmployeeModel
     {
+        [Required(ErrorMessage = "Email is required")]
+        [EmailAddress]
         public string Email { get; set; }
-        [Display(Name = "Phone Number")]
+        [Required(ErrorMessage = "Phone number is required")]
         public string PhoneNumber { get; set; }
+        [Required(ErrorMessage = "First name is required")]
         public string Firstname { get; set; }
+        [Required(ErrorMessage = "Lat name is required")]
         public string Lastname { get; set; }
-        [Display(Name = "Date Joined")]
+        [Required]
         public DateTime DateJoined { get; set; }
+        [Required]
+        public AddressModel Address { get; set; }
+    }
+
+    public class AddressModel
+    {
+        public string City { get; set; }
+        public string Street { get; set; }
+        public string State { get; set; }
+        public string Country { get; set; }
+        public string Zip { get; set; }
     }
 }

@@ -1,37 +1,41 @@
 ﻿@page
 @model PeopleOps.UI.Pages.Admin.LeaveTypes.IndexModel
 @{
+    Layout = "~/Pages/Shared/Layouts/_DashboardLayout.cshtml";
+    ViewData["ActivePage"] = "Leave Types";
 }
 
 <div class="card">
-    <div class="card-body">
-        <div class="card-header">
-            <div class="d-flex justify-content-between my-3">
-                <div class="d-flex align-items-center">
-                    <span>Show</span>&nbsp;
-                    <select type="search" class="form-control form-control-sm">
-                        <option value="10">10</option>
-                        <option value="20">20</option>
-                        <option value="30">30</option>
-                        <option value="40">40</option>
-                        <option value="50">50</option>
-                    </select>&nbsp;
-                    <span>entries</span>
-                </div>
-                <!--<div class="d-flex align-items-center w-40">-->
-                @*<span class="d-block">Search:</span>&nbsp;*@
-                <!--<input type="search" class="form-control form-control-sm" placeholder="Search" />
-                </div>-->
+    <div class="card-header">
+        <div class="d-flex justify-content-between">
+            <div class="d-flex align-items-center">
+                <span>Show</span>&nbsp;
+                <select type="search" class="form-control form-control-sm">
+                    <option value="10">10</option>
+                    <option value="20">20</option>
+                    <option value="30">30</option>
+                    <option value="40">40</option>
+                    <option value="50">50</option>
+                </select>&nbsp;
+                <span>entries</span>
+            </div>
+            <!--<div class="d-flex align-items-center w-40">-->
+            @*<span class="d-block">Search:</span>&nbsp;*@
+            <!--<input type="search" class="form-control form-control-sm" placeholder="Search" />
+            </div>-->
             <a class="btn btn-success" asp-page="/Admin/LeaveTypes/Upsert">
                 Create New <i class="fa fa-plus"></i>
             </a>
-            </div>
         </div>
+    </div>
+    <div class="card-body">
+
         <table class="table">
             <thead>
                 <tr>
                     <th>Name</th>
                     <th>Description</th>
+                    <th>No of Days</th>
                     <th>Date Created</th>
                     <th>Actions</th>
                 </tr>
@@ -39,26 +43,29 @@
             <tbody>
                 @foreach (var item in Model.LeaveTypes)
                 {
-                    <tr>
-                        <td>@Html.DisplayFor(modelItem => item.Name)</td>
-                        <td>@Html.DisplayFor(modelItem => item.Description)</td>
-                        <td>@Html.DisplayFor(modelItem => item.DateCreated)</td>
-                        <td class="d-flex justify-content-end">
-                            <a class="btn btn-warning btn-sm ml-2" asp-action="Edit" asp-route-id="@item.Id" aria-hidden="true">
-                                Edit &nbsp;<i class="fa fa-pencil"></i>
-                            </a>
-                            <a class="btn btn-info btn-sm ml-2" asp-action="Details" asp-route-id="@item.Id" aria-hidden="true">
-                                Details &nbsp;<i class="far fa-eye"></i>
-                            </a>
-                            <a class="btn btn-info btn-sm ml-2" asp-action="Details" asp-route-id="@item.Id" aria-hidden="true">
-                                Delete &nbsp;<i class="far fa-eye"></i>
-                            </a>
-                        </td>
-                    </tr>
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.Name)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Description)</td>
+                    <td>@Html.DisplayFor(modelItem => item.DefaultDays)</td>
+                    <td>@Html.DisplayFor(modelItem => item.DateCreated)</td>
+                    <td class="d-flex justify-content-start">
+                        <a class="btn btn-warning btn-sm" asp-page="/Admin/LeaveTypes/Upsert" asp-route-id="@item.Id" aria-hidden="true">
+                            Edit &nbsp;<i class="fa fa-pencil"></i>
+                        </a>
+                        <a class="btn btn-info btn-sm ml-2" asp-action="Details" asp-route-id="@item.Id" aria-hidden="true">
+                            Details &nbsp;<i class="far fa-eye"></i>
+                        </a>
+                        <a class="btn btn-danger btn-sm ml-2" onclick="return confirm('Are you sure you want to delete this item?');" asp-page="./Index" asp-page-handler="Delete" asp-route-id="@item.Id" aria-hidden="true">
+                            Delete &nbsp;<i class="fas fa-trash-alt"></i>
+                        </a>
+                    </td>
+                </tr>
                 }
             </tbody>
         </table>
-        <div class="d-flex justify-content-between my-4">
+    </div>
+    <div class="card-footer">
+        <div class="d-flex justify-content-between">
             <div>Showing 1 to 3 of @Model.LeaveTypes.Count() entries</div>
             <div>
                 <span>Previous</span>&nbsp;&nbsp;

@@ -2,7 +2,7 @@
 
 namespace PeopleOps.Application.Contracts.Repositories
 {
-    public interface INotificationRepository : IAsyncRepository<Notification>
+    public interface INotificationRepository : IGenericRepository<Notification>
     {
     }
 }
