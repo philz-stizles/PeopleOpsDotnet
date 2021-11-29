@@ -1,8 +1,8 @@
-﻿@using PeopleOps.Application.Models
+﻿@model PeopleOps.Application.Models.CashAdvanceModel
 
 <!-- Modal -->
-<!--<div class="modal fade" id="modal-default">
-    <div class="modal-dialog">
+<div class="modal fade" id="create-cash-advance" tabindex="-1" role="dialog" aria-labelledby="addContactLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title">Cash Advance</h4>
@@ -11,28 +11,26 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form id="cashAdvances" asp-page-handler="CashAdvanceModalPartial">
-                    <hr />
+                <form id="cash-advance-form" asp-page-handler="CashAdvanceModalPartial">
+                    <input name="IsValid" type="hidden" value="@ViewData.ModelState.IsValid.ToString()" />
                     @*<div asp-validation-summary="All" class="text-danger"></div>*@
                     <div class="form-group">
                         <label asp-for="Amount">Amount</label>
                         <input asp-for="Amount" type="text" class="form-control" placeholder="Amount ...">
-                        <span asp-validation-for="Amount" class="text-danger"></span>
+                        <span asp-validation-for="Amount" class="text-danger text-sm"></span>
                     </div>
 
                     <div class="form-group">
                         <label asp-for="Comment">Comment</label>
                         <textarea asp-for="Comment" class="form-control" rows="3" placeholder="Comment ..."></textarea>
-                        <span asp-validation-for="Comment" class="text-danger"></span>
+                        <span asp-validation-for="Comment" class="text-danger text-sm"></span>
                     </div>
                 </form>
             </div>
             <div class="modal-footer justify-content-between">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button onclick="Create()" form="cashAdvances" type="button" class="btn btn-success">Create</button>
+                <button type="button" class="btn btn-success" data-save="modal">Create</button>
             </div>
-        </div>-->
-<!-- /.modal-content -->
-<!--</div>-->
-<!-- /.modal-dialog -->
-<!--</div>-->
+        </div>
+    </div>
+</div>

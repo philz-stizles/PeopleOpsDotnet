@@ -6,8 +6,8 @@ using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.Extensions.Logging;
 using PeopleOps.Application.Contracts.Services;
 using PeopleOps.Application.Models;
+using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace PeopleOps.UI.Pages.CashAdvances
@@ -30,11 +30,6 @@ namespace PeopleOps.UI.Pages.CashAdvances
 
         [BindProperty]
         public CashAdvanceModel Input { get; set; }
-
-        public class CashAdvancePostModel 
-        {
-            public CashAdvanceModel Input { get; set; }
-        }
 
         [TempData]
         public string ErrorMessage { get; set; }
@@ -76,6 +71,36 @@ namespace PeopleOps.UI.Pages.CashAdvances
                 ViewName = "_CashAdvanceModalPartial",
                 ViewData = new ViewDataDictionary<CashAdvanceModel>(ViewData, new CashAdvanceModel { })
             };
+        }
+
+        public async Task<PartialViewResult> OnPostCashAdvanceModalPartial(CashAdvanceModel model)
+        {
+            try
+            {
+                // If there are no form validation errors, save form data.
+                if (ModelState.IsValid)
+                {
+                    await _cashAdvanceService.CreateAsync(model);
+
+                    _notyf.Success("Your cash advance request has been created successfully");
+                }
+
+                return new PartialViewResult
+                {
+                    ViewName = "_CashAdvanceModalPartial",
+                    ViewData = new ViewDataDictionary<CashAdvanceModel>(ViewData, model)
+                };
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message);
+
+                return new PartialViewResult
+                {
+                    ViewName = "_CashAdvanceModalPartial",
+                    ViewData = new ViewDataDictionary<CashAdvanceModel>(ViewData, model)
+                };
+            }
         }
 
         private async Task LoadCashAdvances()

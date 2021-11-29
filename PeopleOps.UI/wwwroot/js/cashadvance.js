@@ -1,4 +1,41 @@
-﻿function Create() {
+﻿$(function () {
+    var placeholderElement = $('#modal-placeholder');
+
+    $('button[data-toggle="ajax-modal"]').click(function (event) {
+        var url = $(this).data('url');
+        $.get(url).done(function (data) {
+            placeholderElement.html(data);
+            placeholderElement.find('.modal').modal('show');
+        });
+    });
+
+    placeholderElement.on('click', '[data-save="modal"]', function (event) {
+        // prevent default button click actions
+        event.preventDefault();
+
+        // Grab form data and send it
+        var form = $(this).parents('.modal').find('#cash-advance-form');
+        var actionUrl = form.attr('action');
+        var serializedFormData = form.serialize();
+
+        $.post(actionUrl, serializedFormData).done(function (data) {
+            // data is the rendered _CashAdvanceModalPartial
+            var newBody = $('.modal-body', data);
+            // replace modal contents with new form
+            placeholderElement.find('.modal-body').replaceWith(newBody);
+
+            // If Model.IsValid is true, close the modal
+            var isValid = newBody.find('[name="IsValid"]').val() == 'True';
+            if (isValid) {
+                placeholderElement.find('.modal').modal('hide');
+            }
+        });
+    });
+});
+
+
+
+function Create() {
     var data = $("#cashAdvances").serialize();
     console.log(data);
     $.ajax({
